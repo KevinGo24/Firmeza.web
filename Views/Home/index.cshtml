@@ -1,0 +1,63 @@
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="min-h-screen w-screen relative left-1/2 right-1/2 -mx-[50vw] bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 flex items-center justify-center px-4 py-16">
+    <div class="max-w-4xl w-full text-center">
+
+        <!-- Icono principal -->
+        <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 mb-6 shadow-lg">
+            <i class="bi bi-shield-lock-fill text-4xl text-cyan-300"></i>
+        </div>
+
+        <!-- Título -->
+        <h1 class="display-4 text-white font-bold tracking-tight mb-3">
+            Bienvenido
+        </h1>
+        <p class="text-blue-200 text-lg mb-12">
+            Gestiona tus finanzas con seguridad y confianza
+        </p>
+
+        <!-- Tarjetas de características -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+
+            <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 hover:bg-white/15 transition duration-300 shadow-xl">
+                <div class="flex items-center justify-center w-14 h-14 rounded-xl bg-cyan-500/20 mx-auto mb-4">
+                    <i class="bi bi-wallet2 text-2xl text-cyan-300"></i>
+                </div>
+                <h3 class="text-white font-semibold text-lg mb-2">Cuentas</h3>
+                <p class="text-blue-200 text-sm">
+                    Consulta saldos y movimientos en tiempo real
+                </p>
+            </div>
+
+            <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 hover:bg-white/15 transition duration-300 shadow-xl">
+                <div class="flex items-center justify-center w-14 h-14 rounded-xl bg-emerald-500/20 mx-auto mb-4">
+                    <i class="bi bi-arrow-left-right text-2xl text-emerald-300"></i>
+                </div>
+                <h3 class="text-white font-semibold text-lg mb-2">Transferencias</h3>
+                <p class="text-blue-200 text-sm">
+                    Envía dinero de forma rápida y segura
+                </p>
+            </div>
+
+            <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 hover:bg-white/15 transition duration-300 shadow-xl">
+                <div class="flex items-center justify-center w-14 h-14 rounded-xl bg-amber-500/20 mx-auto mb-4">
+                    <i class="bi bi-graph-up-arrow text-2xl text-amber-300"></i>
+                </div>
+                <h3 class="text-white font-semibold text-lg mb-2">Inversiones</h3>
+                <p class="text-blue-200 text-sm">
+                    Haz crecer tu patrimonio con nosotros
+                </p>
+            </div>
+
+        </div>
+
+        <!-- Pie de confianza -->
+        <div class="flex items-center justify-center gap-2 text-blue-300 text-sm">
+            <i class="bi bi-lock-fill"></i>
+            <span>Conexión cifrada y protegida</span>
+        </div>
+
+    </div>
+</div>

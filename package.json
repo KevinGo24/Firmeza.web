@@ -1,0 +1,25 @@
+{
+  "name": "firmeza.appweb",
+  "version": "1.0.0",
+  "description": "Users History C3 -ASP.Net",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite build --watch",
+    "build": "vite build"
+  },
+  "keywords": [],
+  "author": "Kevin Andres Gonzalez Visbal",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "bootstrap-icons": "^1.13.1",
+    "sweetalert2": "^11.26.25"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "tailwindcss": "^4.3.3",
+    "vite": "^8.3.0"
+  }
+}

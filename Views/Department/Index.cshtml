@@ -1,0 +1,156 @@
+@model Firmeza.AppWeb.ViewModels.DepartmentIndexViewModel
+@{
+    ViewData["Title"] = "Departamentos";
+}
+
+<div class="py-8">
+    <div class="flex items-center justify-between mb-6">
+        <div>
+            <h1 class="text-2xl font-bold text-slate-900">Departamentos</h1>
+            <p class="text-slate-500">Gestiona las áreas de la organización</p>
+        </div>
+        <a asp-controller="Department" asp-action="Create"
+           class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition">
+            <i class="bi bi-plus-lg"></i> Nuevo Departamento
+        </a>
+    </div>
+
+    <!-- Tarjetas de resumen -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+            <div class="flex items-center justify-between mb-3">
+                <span class="text-slate-500 text-sm">Total departamentos</span>
+                <i class="bi bi-building text-blue-600 text-xl"></i>
+            </div>
+            <p class="text-3xl font-bold text-slate-900">@Model.TotalCount</p>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+            <div class="flex items-center justify-between mb-3">
+                <span class="text-slate-500 text-sm">Activos</span>
+                <i class="bi bi-check-circle text-emerald-600 text-xl"></i>
+            </div>
+            <p class="text-3xl font-bold text-slate-900">@Model.ActiveCount</p>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+            <div class="flex items-center justify-between mb-3">
+                <span class="text-slate-500 text-sm">Inactivos</span>
+                <i class="bi bi-x-circle text-red-500 text-xl"></i>
+            </div>
+            <p class="text-3xl font-bold text-slate-900">@Model.InactiveCount</p>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+            <div class="flex items-center justify-between mb-3">
+                <span class="text-slate-500 text-sm">Presupuesto total</span>
+                <i class="bi bi-cash-stack text-amber-600 text-xl"></i>
+            </div>
+            <p class="text-3xl font-bold text-slate-900">@Model.TotalBudget.ToString("C0")</p>
+        </div>
+
+    </div>
+
+    <!-- Formulario de búsqueda -->
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 mb-6">
+        <form method="get" asp-controller="Department" asp-action="Index" class="flex flex-col sm:flex-row gap-3">
+            <div class="flex-1">
+                <label for="code" class="block text-sm font-medium text-slate-700 mb-1">Buscar por código</label>
+                <div class="relative">
+                    <i class="bi bi-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                    <input
+                        type="text"
+                        id="code"
+                        name="code"
+                        value="@Model.SearchCode"
+                        placeholder="Ej: DEP-001"
+                        class="w-full pl-9 pr-3 py-2 border border-slate-300 rounded-lg text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    />
+                </div>
+            </div>
+            <div class="flex items-end gap-2">
+                <button type="submit" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition h-[42px]">
+                    <i class="bi bi-search"></i> Buscar
+                </button>
+                <a asp-controller="Department" asp-action="Index" class="inline-flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-medium px-4 py-2 rounded-lg transition h-[42px]">
+                    <i class="bi bi-arrow-counterclockwise"></i> Limpiar
+                </a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Tabla de resultados -->
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-x-auto">
+        <table class="w-full text-sm">
+            <thead>
+                <tr class="text-left text-slate-500 border-b border-slate-200">
+                    <th class="py-3 px-4 font-medium">Código</th>
+                    <th class="py-3 px-4 font-medium">Nombre</th>
+                    <th class="py-3 px-4 font-medium">Ubicación</th>
+                    <th class="py-3 px-4 font-medium">Teléfono</th>
+                    <th class="py-3 px-4 font-medium">Estado</th>
+                    <th class="py-3 px-4 font-medium text-right">Acciones</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+                @if (Model.Departments.Any())
+                {
+                    @foreach (var dept in Model.Departments)
+                    {
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-4 text-slate-600">@dept.Code</td>
+                            <td class="py-3 px-4 flex items-center gap-2 text-slate-800">
+                                <i class="bi bi-building text-blue-600"></i> @dept.Name
+                            </td>
+                            <td class="py-3 px-4 text-slate-600">@dept.Location</td>
+                            <td class="py-3 px-4 text-slate-600">@dept.Phone</td>
+                            <td class="py-3 px-4">
+                                @if (dept.IsActive)
+                                {
+                                    <span class="inline-flex items-center gap-1 bg-emerald-50 text-emerald-700 text-xs font-medium px-2 py-1 rounded-full">
+                                        <i class="bi bi-check-circle"></i> Activo
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="inline-flex items-center gap-1 bg-red-50 text-red-700 text-xs font-medium px-2 py-1 rounded-full">
+                                        <i class="bi bi-x-circle"></i> Inactivo
+                                    </span>
+                                }
+                            </td>
+                            <td class="py-3 px-4 text-right">
+                                <div class="flex items-center justify-end gap-2">
+                                    <a asp-controller="Department" asp-action="Update" asp-route-id="@dept.Id"
+                                       class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition"
+                                       title="Editar">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+
+                                    <form id="delete-form-@dept.Id" asp-controller="Department" asp-action="Delete" asp-route-id="@dept.Id" method="post" class="inline">
+                                        <button type="button"
+                                                onclick="confirmDelete('@dept.Id', '@dept.Name')"
+                                                class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition"
+                                                title="Eliminar">
+                                            <i class="bi bi-trash3"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="6" class="py-10 px-4 text-center text-slate-400">
+                            <i class="bi bi-inbox text-3xl block mb-2"></i>
+                            No hay departamentos para mostrar
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
